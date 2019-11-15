@@ -48,7 +48,7 @@ module "gcp_gke_node_pool" {
   zone                  = var.zone
   service_account_email = var.service_account_email
   cluster_name          = module.gcp_gke_cluster.cluster_name
-  gke_version           = var.gke_version
+  gke_version           = module.gcp_gke_cluster.master_version
 
   node_pools = var.node_pools
 

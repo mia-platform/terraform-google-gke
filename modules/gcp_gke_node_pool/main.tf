@@ -24,7 +24,7 @@ terraform {
 resource "google_container_node_pool" "node_pool" {
   count = length(var.node_pools)
 
-  name       = replace(".", "", "${var.node_pools[count.index].name}-${var.gke_version}")
+  name       = replace("${var.node_pools[count.index].name}-${var.gke_version}", ".", "")
   location   = var.zone
   project    = var.project_id
   cluster    = var.cluster_name
