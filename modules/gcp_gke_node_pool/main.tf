@@ -49,7 +49,8 @@ resource "google_container_node_pool" "node_pool" {
       "cloud-platform"
     ]
 
-    tags = var.node_pools[count.index].tags
+    tags   = var.node_pools[count.index].tags
+    labels = var.node_pools[count.index].labels
   }
 
   management {

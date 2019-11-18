@@ -60,8 +60,14 @@ variable "master_authorized_networks_config" {
   default     = []
 }
 
+variable "cluster_labels" {
+  type        = map(string)
+  description = "The GCP labels to attach on the GKE cluster"
+  default     = {}
+}
+
 variable "node_pools" {
-  type        = list(object({ name = string, node_count = number, machine_type = string, tags = list(string) }))
+  type        = list(object({ name = string, node_count = number, machine_type = string, tags = list(string), labels = map(string) }))
   description = ""
 }
 

@@ -60,6 +60,12 @@ variable "master_authorized_networks_config" {
   default     = []
 }
 
+variable "cluster_labels" {
+  type        = map(string)
+  description = "The GCP labels to attach on the GKE cluster"
+  default     = {}
+}
+
 variable "gke_version" {
   type        = string
   description = "Cluster version minimal"

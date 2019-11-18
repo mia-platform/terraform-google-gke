@@ -39,7 +39,8 @@ module "gcp_gke_cluster" {
   master_ip_range                   = var.master_ip_range
   master_authorized_networks_config = var.master_authorized_networks_config
 
-  gke_version = var.gke_version
+  gke_version    = var.gke_version
+  cluster_labels = var.cluster_labels
 }
 
 module "gcp_gke_node_pool" {

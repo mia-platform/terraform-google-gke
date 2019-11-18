@@ -42,7 +42,7 @@ resource "google_container_cluster" "cluster" {
   }
 
   monitoring_service = "none"
-  logging_service = "none"
+  logging_service    = "none"
 
   maintenance_policy {
     daily_maintenance_window {
@@ -87,5 +87,6 @@ resource "google_container_cluster" "cluster" {
     }
   }
 
+  resource_labels    = var.cluster_labels
   min_master_version = var.gke_version
 }
