@@ -61,7 +61,7 @@ variable "master_authorized_networks_config" {
 }
 
 variable "node_pools" {
-  type        = list(object({ name = string, node_count = number, machine_type = string }))
+  type        = list(object({ name = string, node_count = number, machine_type = string, tags = list(string) }))
   description = ""
 }
 

@@ -40,21 +40,20 @@ resource "google_container_node_pool" "node_pool" {
       enable_secure_boot = true
     }
 
-    service_account = var.service_account_email
-
     metadata = {
       disable-legacy-endpoints = "true"
     }
 
+    service_account = var.service_account_email
     oauth_scopes = [
-      "https://www.googleapis.com/auth/logging.write",
-      "https://www.googleapis.com/auth/monitoring",
+      "cloud-platform"
     ]
 
+    tags = var.node_pools[count.index].tags
   }
+
   management {
     auto_repair  = true
     auto_upgrade = false
   }
-
 }

@@ -28,28 +28,29 @@ locals {
 module "gcp_gke_cluster" {
   source = "./modules/gcp_gke_cluster"
 
-  cluster_name                      = var.cluster_name
-  project_id                        = var.project_id
-  zone                              = var.zone
-  network                           = var.network
-  subnetwork                        = var.subnetwork
+  cluster_name = var.cluster_name
+  project_id   = var.project_id
+  zone         = var.zone
+  network      = var.network
+  subnetwork   = var.subnetwork
+
   pods_ip_range                     = var.pods_ip_range
   services_ip_range                 = var.services_ip_range
   master_ip_range                   = var.master_ip_range
   master_authorized_networks_config = var.master_authorized_networks_config
-  gke_version                       = var.gke_version
 
+  gke_version = var.gke_version
 }
 
 module "gcp_gke_node_pool" {
   source = "./modules/gcp_gke_node_pool"
 
-  project_id            = var.project_id
-  zone                  = var.zone
+  project_id = var.project_id
+  zone       = var.zone
+
+  cluster_name = module.gcp_gke_cluster.cluster_name
+  gke_version  = var.gke_version
+
+  node_pools            = var.node_pools
   service_account_email = var.service_account_email
-  cluster_name          = module.gcp_gke_cluster.cluster_name
-  gke_version           = module.gcp_gke_cluster.master_version
-
-  node_pools = var.node_pools
-
 }

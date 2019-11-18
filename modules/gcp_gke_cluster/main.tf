@@ -42,6 +42,7 @@ resource "google_container_cluster" "cluster" {
   }
 
   monitoring_service = "none"
+  logging_service = "none"
 
   maintenance_policy {
     daily_maintenance_window {
@@ -75,11 +76,16 @@ resource "google_container_cluster" "cluster" {
   }
 
   addons_config {
+    horizontal_pod_autoscaling {
+      disabled = false
+    }
     http_load_balancing {
+      disabled = false
+    }
+    network_policy_config {
       disabled = true
     }
   }
 
   min_master_version = var.gke_version
-
 }
