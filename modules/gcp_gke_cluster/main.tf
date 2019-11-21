@@ -89,4 +89,9 @@ resource "google_container_cluster" "cluster" {
 
   resource_labels    = var.cluster_labels
   min_master_version = var.gke_version
+
+  provisioner "local-exec" {
+    command = "${path.module}/scripts/peer-route-exporter.sh ${split("/", var.network)[6]} ${split("/", var.network)[9]}"
+  }
+
 }
