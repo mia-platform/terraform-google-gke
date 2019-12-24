@@ -38,8 +38,3 @@ variable "node_pools" {
   type        = list(object({ name = string, node_count = number, machine_type = string, tags = list(string), labels = map(string) }))
   description = ""
 }
-
-variable "gke_version" {
-  type        = string
-  description = "Minimal cluster version"
-}
