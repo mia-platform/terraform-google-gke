@@ -21,6 +21,13 @@ terraform {
   }
 }
 
+locals {
+
+  authenticator_groups_config = var.security_group == null ? [] : [{
+    security_group = var.security_group
+  }]
+}
+
 resource "google_container_cluster" "cluster" {
   provider = google-beta
   name     = var.cluster_name
@@ -94,8 +101,12 @@ resource "google_container_cluster" "cluster" {
     command = "${path.module}/scripts/peer-route-exporter.sh ${split("/", var.network)[6]} ${split("/", var.network)[9]}"
   }
 
-  authenticator_groups_config {
-    security_group = var.security_group
+  dynamic "authenticator_groups_config" {
+    for_each = local.authenticator_groups_config
+
+    content {
+      security_group = authenticator_groups_config.value.security_group
+    }
   }
 
 }

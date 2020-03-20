@@ -84,4 +84,5 @@ variable "gke_version" {
 variable "security_group" {
   type        = string
   description = "RBAC Security group"
+  default     = null
 }
