@@ -51,6 +51,8 @@ resource "google_container_node_pool" "node_pool" {
 
     tags   = var.node_pools[count.index].tags
     labels = var.node_pools[count.index].labels
+
+    min_cpu_platform = lookup(var.node_pools[count.index], "min_cpu_platform", "")
   }
 
   management {
