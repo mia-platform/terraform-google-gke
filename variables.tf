@@ -80,3 +80,8 @@ variable "gke_version" {
   type        = string
   description = "Cluster version minimal"
 }
+
+variable "security_group" {
+  type        = string
+  description = "RBAC Security group"
+}

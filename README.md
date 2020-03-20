@@ -11,7 +11,7 @@ This module is meant for use with Terraform 0.12.
 ### Software
 
 - [Terraform][terraform] >= 0.12.6
-- [terraform-provider-google][provider-google] plugin 2.19.x
+- [terraform-provider-google-beta][provider-google-beta] plugin ~> 2.20
 
 ### Permissions
 

@@ -17,7 +17,7 @@
 terraform {
   required_version = ">= 0.12"
   required_providers {
-    google = ">= 2.19.0"
+    google-beta = "~> 2.20"
   }
 }
 
@@ -40,6 +40,7 @@ module "gcp_gke_cluster" {
 
   gke_version    = var.gke_version
   cluster_labels = var.cluster_labels
+  security_group = var.security_group
 }
 
 module "gcp_gke_node_pool" {

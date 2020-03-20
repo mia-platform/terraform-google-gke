@@ -17,12 +17,12 @@
 terraform {
   required_version = ">= 0.12"
   required_providers {
-    google = ">= 2.19.0"
+    google-beta = "~> 2.20"
   }
 }
 
 resource "google_container_cluster" "cluster" {
-
+  provider = google-beta
   name     = var.cluster_name
   location = var.zone
   project  = var.project_id
@@ -92,6 +92,10 @@ resource "google_container_cluster" "cluster" {
 
   provisioner "local-exec" {
     command = "${path.module}/scripts/peer-route-exporter.sh ${split("/", var.network)[6]} ${split("/", var.network)[9]}"
+  }
+
+  authenticator_groups_config {
+    security_group = var.security_group
   }
 
 }

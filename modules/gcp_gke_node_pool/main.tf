@@ -17,12 +17,13 @@
 terraform {
   required_version = ">= 0.12"
   required_providers {
-    google = ">= 2.19.0"
+    google-beta = "~> 2.20"
   }
 }
 
 resource "google_container_node_pool" "node_pool" {
-  count = length(var.node_pools)
+  provider = google-beta
+  count    = length(var.node_pools)
 
   name       = var.node_pools[count.index].name
   location   = var.zone
