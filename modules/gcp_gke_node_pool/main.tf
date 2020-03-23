@@ -21,19 +21,23 @@ terraform {
   }
 }
 
+locals {
+  pool_map = { for pool in var.node_pools : pool.name => pool }
+}
+
 resource "google_container_node_pool" "node_pool" {
   provider = google-beta
-  count    = length(var.node_pools)
+  for_each = local.pool_map
 
-  name       = var.node_pools[count.index].name
+  name       = each.key
   location   = var.zone
   project    = var.project_id
   cluster    = var.cluster_name
-  node_count = var.node_pools[count.index].node_count
+  node_count = each.value.node_count
 
   node_config {
     preemptible  = false
-    machine_type = var.node_pools[count.index].machine_type
+    machine_type = each.value.machine_type
     disk_size_gb = 50
     image_type   = "COS"
 
@@ -50,10 +54,10 @@ resource "google_container_node_pool" "node_pool" {
       "cloud-platform"
     ]
 
-    tags   = var.node_pools[count.index].tags
-    labels = var.node_pools[count.index].labels
+    tags   = each.value.tags
+    labels = each.value.labels
 
-    min_cpu_platform = lookup(var.node_pools[count.index], "min_cpu_platform", "")
+    min_cpu_platform = lookup(each.value, "min_cpu_platform", "")
   }
 
   management {

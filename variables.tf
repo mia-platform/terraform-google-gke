@@ -67,7 +67,7 @@ variable "cluster_labels" {
 }
 
 variable "node_pools" {
-  type        = list(object({ name = string, node_count = number, machine_type = string, tags = list(string), labels = map(string) }))
+  type        = list(object({ name = string, node_count = number, machine_type = string, min_cpu_platform = string, tags = list(string), labels = map(string) }))
   description = ""
 }
 
