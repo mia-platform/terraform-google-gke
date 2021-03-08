@@ -111,6 +111,10 @@ resource "google_container_cluster" "master" {
     identity_namespace = local.workload_identity_namespace
   }
 
+  vertical_pod_autoscaling {
+    enabled = var.vertical_pod_autoscaling_enabled
+  }
+
   addons_config {
     http_load_balancing {
       disabled = false

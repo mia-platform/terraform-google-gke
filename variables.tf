@@ -42,7 +42,7 @@ variable "location" {
 }
 
 variable "zones" {
-  type        = list
+  type        = list(any)
   default     = []
   description = "If you are creating a regional or multizonal cluster, set here the desired zone names"
 }
@@ -78,10 +78,16 @@ variable "master_global_access" {
   description = "Whether the cluster master is accessible globally or only from the same region."
 }
 
-variable authenticator_security_group {
+variable "authenticator_security_group" {
   type        = string
   default     = ""
   description = "The name of the RBAC security group for use with Google security groups in Kubernetes RBAC. Group name must be in format gke-security-groups@yourdomain.com"
+}
+
+variable "vertical_pod_autoscaling_enabled" {
+  type        = bool
+  default     = false
+  description = "Enable the vertical pod autoscaling functionality of the GKE cluster"
 }
 
 variable "defaults_node_pools_configs" {
