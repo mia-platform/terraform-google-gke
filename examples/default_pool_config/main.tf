@@ -14,10 +14,6 @@
    limitations under the License.
 */
 
-provider "google" {
-  version = "~> 3.22.0"
-}
-
 data "google_compute_subnetwork" "subnetwork" {
   project = var.project_id
   name    = var.subnetwork_name

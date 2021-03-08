@@ -1,5 +1,5 @@
-# Created by https://www.gitignore.io/api/linux,macos,windows,terraform,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=linux,macos,windows,terraform,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/macos,linux,windows,terraform,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=macos,linux,windows,terraform,visualstudiocode
 
 ### Linux ###
 *~
@@ -24,6 +24,7 @@
 
 # Icon must end with two \r
 Icon
+
 
 # Thumbnails
 ._*
@@ -75,17 +76,18 @@ override.tf.json
 # example: *tfplan*
 tfplan
 *.tfplan
+.terraform.lock.hcl
 
 ### VisualStudioCode ###
 .vscode/*
-!.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
-!.vscode/extensions.json
+*.code-workspace
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
+.ionide
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -113,4 +115,4 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/linux,macos,windows,terraform,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/macos,linux,windows,terraform,visualstudiocode
