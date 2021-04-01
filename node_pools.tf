@@ -44,7 +44,7 @@ resource "google_container_node_pool" "pools" {
 
   node_locations = lookup(each.value, "node_locations", "") != "" ? split(",", each.value["node_locations"]) : null
   node_config {
-    image_type   = "COS"
+    image_type   = each.value.machine_image
     machine_type = each.value.machine_type
 
     local_ssd_count  = 0
