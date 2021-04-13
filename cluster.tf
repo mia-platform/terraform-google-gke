@@ -62,7 +62,7 @@ resource "google_container_cluster" "master" {
 
   private_cluster_config {
     enable_private_nodes    = true
-    enable_private_endpoint = true
+    enable_private_endpoint = var.enable_private_only_api_server
     master_ipv4_cidr_block  = var.master_ipv4_cidr_block
     master_global_access_config {
       enabled = var.master_global_access
@@ -99,8 +99,8 @@ resource "google_container_cluster" "master" {
   }
 
   network_policy {
-    enabled  = true
-    provider = "CALICO"
+    enabled  = local.gke_calico_enabled.enabled
+    provider = local.gke_calico_enabled.provider
   }
 
   pod_security_policy_config {
@@ -125,7 +125,7 @@ resource "google_container_cluster" "master" {
     }
 
     network_policy_config {
-      disabled = false
+      disabled = local.gke_calico_enabled.enabled ? false : true
     }
 
     istio_config {

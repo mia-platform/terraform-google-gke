@@ -15,9 +15,15 @@
 */
 
 locals {
-  min_master_version           = var.kubernetes_version != "latest" ? var.kubernetes_version : data.google_container_engine_versions.available.latest_master_version
-  authenticator_security_group = var.authenticator_security_group == null ? {} : { security_group = var.authenticator_security_group }
-  workload_identity_namespace  = "${var.project_id}.svc.id.goog"
+  min_master_version = var.kubernetes_version != "latest" ? var.kubernetes_version : data.google_container_engine_versions.available.latest_master_version
+  authenticator_security_group = var.authenticator_security_group == "" ? {} : {
+    security_group = var.authenticator_security_group
+  }
+  gke_calico_enabled = {
+    enabled : var.gke_calico_enabled,
+    provider : var.gke_calico_enabled ? "CALICO" : null
+  }
+  workload_identity_namespace = "${var.project_id}.svc.id.goog"
   master_authorized_networks_config = length(var.master_authorized_networks) == 0 ? [] : [{
     cidr_blocks : var.master_authorized_networks
   }]

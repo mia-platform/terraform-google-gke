@@ -52,6 +52,12 @@ variable "subnetwork" {
   description = "The GCP subnetwork self_link where you want to create your cluster"
 }
 
+variable "enable_private_only_api_server" {
+  type        = bool
+  default     = true
+  description = "Set to false to enable public endpoint for the Api Server"
+}
+
 variable "master_ipv4_cidr_block" {
   type        = string
   description = "Ip range for master network in CIDR notation"
@@ -88,6 +94,12 @@ variable "vertical_pod_autoscaling_enabled" {
   type        = bool
   default     = false
   description = "Enable the vertical pod autoscaling functionality of the GKE cluster"
+}
+
+variable "gke_calico_enabled" {
+  type        = bool
+  default     = true
+  description = "Enable the GKE managed Calico installation for Network Policies"
 }
 
 variable "defaults_node_pools_configs" {
