@@ -104,7 +104,7 @@ resource "google_container_cluster" "master" {
   }
 
   pod_security_policy_config {
-    enabled = true
+    enabled = var.enable_pod_security_policies
   }
 
   workload_identity_config {

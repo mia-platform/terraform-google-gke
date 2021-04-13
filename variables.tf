@@ -102,6 +102,12 @@ variable "gke_calico_enabled" {
   description = "Enable the GKE managed Calico installation for Network Policies"
 }
 
+variable "enable_pod_security_policies" {
+  type = bool
+  default = true
+  description = "Enable Pod Security Policy in cluster"
+}
+
 variable "defaults_node_pools_configs" {
   type        = map(string) # Check the README for the valid properties for this object
   default     = {}
