@@ -144,6 +144,12 @@ variable "node_pools_labels" {
   description = "The lables to apply to the node_pools, use the node_pools name as key of the map"
 }
 
+variable "node_pools_taints" {
+  type        = map(list(map(string)))
+  default     = {}
+  description = "The taints to apply to the node_pools, use the node_pools name as key of the map"
+}
+
 variable "maintenance_start_time" {
   type        = string
   description = "Time window specified for daily maintenance operations in RFC3339 format"

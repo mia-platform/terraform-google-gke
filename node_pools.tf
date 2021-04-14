@@ -64,6 +64,7 @@ resource "google_container_node_pool" "pools" {
       node_metadata = "GKE_METADATA_SERVER"
     }
 
+    taint = lookup(var.node_pools_taints, each.key, [])
     labels = lookup(var.node_pools_labels, each.key, var.defaults_node_pools_labels)
     tags   = lookup(var.node_pools_tags, each.key, var.defaults_node_pools_tags)
     metadata = {
@@ -72,7 +73,10 @@ resource "google_container_node_pool" "pools" {
   }
 
   lifecycle {
-    ignore_changes = [initial_node_count]
+    ignore_changes = [
+      initial_node_count,
+      node_config["taint"],
+    ]
   }
 
   timeouts {
