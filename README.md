@@ -34,6 +34,8 @@ The node_pools variable takes the following parameters:
 | name | The name of the pool | string |  | ❌ | Required |
 | min_size | The minumun number of nodes in the pool | number | 3 | ✅ | Optional |
 | max_size | The minumun number of nodes in the pool, if not present the same value of `min_size` will be used | number | `min_size` | ✅ | Optional |
+| max_surge | The number of additional nodes that can be added to the node pool during an upgrade | number | 1 | ✅ | Optional |
+| max_unavailable | The number of nodes that can be simultaneously unavailable during an upgrade | number | 0 | ✅ | Optional |
 | machine_type | The GCP instance machine type to use | string |  | ✅ | Required |
 | machine_image | The GCP instance machine image name to use | string | `"COS"` | ✅ | Optional |
 | min_cpu_platform | The minimum CPU platform to use, if not set the zone default will be used | string | `""` | ✅ | Optional |

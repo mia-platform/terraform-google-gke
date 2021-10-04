@@ -41,7 +41,7 @@ resource "google_container_cluster" "master" {
 
   enable_binary_authorization = false
   enable_intranode_visibility = false
-  enable_shielded_nodes       = true
+  enable_shielded_nodes       = var.enable_shielded_nodes
   enable_kubernetes_alpha     = false
   enable_legacy_abac          = false
   enable_tpu                  = false

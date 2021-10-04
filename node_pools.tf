@@ -38,8 +38,8 @@ resource "google_container_node_pool" "pools" {
     }
   }
   upgrade_settings {
-    max_surge       = 1
-    max_unavailable = 0
+    max_surge       = each.value.max_surge
+    max_unavailable = each.value.max_unavailable
   }
 
   node_locations = lookup(each.value, "node_locations", "") != "" ? split(",", each.value["node_locations"]) : null
@@ -64,7 +64,7 @@ resource "google_container_node_pool" "pools" {
       node_metadata = "GKE_METADATA_SERVER"
     }
 
-    taint = lookup(var.node_pools_taints, each.key, [])
+    taint  = lookup(var.node_pools_taints, each.key, [])
     labels = lookup(var.node_pools_labels, each.key, var.defaults_node_pools_labels)
     tags   = lookup(var.node_pools_tags, each.key, var.defaults_node_pools_tags)
     metadata = {
