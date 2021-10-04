@@ -34,7 +34,10 @@ locals {
     disk_size_gb     = 50
     service_account  = ""
     machine_image    = "COS"
+    max_surge        = 1
+    max_unavailable  = 0
   }, var.defaults_node_pools_configs)
+
   node_pool_names = [for pool in var.node_pools : pool.name]
   node_pools = { for pool in var.node_pools :
     pool.name => merge(local.defaults_node_pools_configs, pool)

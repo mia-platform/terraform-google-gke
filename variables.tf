@@ -103,8 +103,8 @@ variable "gke_calico_enabled" {
 }
 
 variable "enable_pod_security_policies" {
-  type = bool
-  default = true
+  type        = bool
+  default     = true
   description = "Enable Pod Security Policy in cluster"
 }
 
@@ -160,4 +160,10 @@ variable "labels" {
   type        = map(string)
   description = "The GCP labels to attach on the GKE cluster"
   default     = {}
+}
+
+variable "enable_shielded_nodes" {
+  type        = bool
+  default     = true
+  description = "The flag that enables shielded nodes"
 }
