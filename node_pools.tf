@@ -61,7 +61,7 @@ resource "google_container_node_pool" "pools" {
       enable_integrity_monitoring = true
     }
     workload_metadata_config {
-      node_metadata = "GKE_METADATA_SERVER"
+      mode = "GKE_METADATA"
     }
 
     taint  = lookup(var.node_pools_taints, each.key, [])

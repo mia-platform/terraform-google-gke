@@ -83,9 +83,6 @@ resource "google_container_cluster" "master" {
   }
 
   master_auth {
-    username = ""
-    password = ""
-
     client_certificate_config {
       issue_client_certificate = false
     }
@@ -108,7 +105,7 @@ resource "google_container_cluster" "master" {
   }
 
   workload_identity_config {
-    identity_namespace = local.workload_identity_namespace
+    workload_pool = local.workload_identity_namespace
   }
 
   vertical_pod_autoscaling {

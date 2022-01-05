@@ -49,7 +49,7 @@ locals {
   output_endpoint                   = google_container_cluster.master.endpoint
   output_master_authorized_networks = google_container_cluster.master.master_authorized_networks_config
   output_ca_certificate             = google_container_cluster.master.master_auth.0.cluster_ca_certificate
-  output_instance_group_urls        = google_container_cluster.master.instance_group_urls
+  output_instance_group_urls        = [for pool in google_container_node_pool.pools : pool.managed_instance_group_urls]
 }
 
 data "google_project" "prj" {

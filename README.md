@@ -5,14 +5,14 @@ available turned on, and with minimal dependencies to gke managed feature if not
 
 ## Compatibility
 
-This module is meant for use with Terraform 0.12.
+This module is meant for use with Terraform 0.14.
 
 ## Requirements
 
 ### Software
 
-- [Terraform][terraform] >= 0.12.6
-- [terraform-provider-google-beta][provider-google-beta] plugin >= 3.22 <4.0.0
+- [Terraform][terraform] >= 0.14
+- [terraform-provider-google-beta][provider-google-beta] plugin >= 4.5, < 5.0.0
 
 ### Permissions
 
