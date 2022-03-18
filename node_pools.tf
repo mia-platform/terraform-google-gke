@@ -51,7 +51,7 @@ resource "google_container_node_pool" "pools" {
     disk_size_gb     = each.value.disk_size_gb
     disk_type        = "pd-standard"
     min_cpu_platform = each.value.min_cpu_platform
-    preemptible      = false
+    preemptible      = each.value.preemptible
 
     service_account = each.value.service_account
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
