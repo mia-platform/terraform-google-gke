@@ -39,7 +39,10 @@ resource "google_container_cluster" "master" {
   network    = data.google_compute_subnetwork.subnetwork.network
   subnetwork = data.google_compute_subnetwork.subnetwork.self_link
 
-  enable_binary_authorization = false
+  binary_authorization {
+    evaluation_mode = "DISABLED"
+  }
+
   enable_intranode_visibility = false
   enable_shielded_nodes       = var.enable_shielded_nodes
   enable_kubernetes_alpha     = false
