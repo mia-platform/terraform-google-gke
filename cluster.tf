@@ -169,7 +169,9 @@ resource "google_container_cluster" "master" {
     ignore_changes = [
       node_pool,
       initial_node_count,
-      min_master_version
+      min_master_version,
+      binary_authorization,
+      node_pool_auto_config
     ]
   }
 }
