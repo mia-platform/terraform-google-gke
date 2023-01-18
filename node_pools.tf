@@ -28,8 +28,9 @@ resource "google_container_node_pool" "pools" {
     auto_upgrade = false
   }
 
-  initial_node_count = each.value.min_size
+  initial_node_count = each.value.min_size == each.value.max_size ? null : each.value.min_size
   node_count         = each.value.min_size != each.value.max_size ? null : each.value.min_size
+
   dynamic "autoscaling" {
     for_each = each.value.min_size != each.value.max_size ? [each.value] : []
     content {
@@ -37,8 +38,9 @@ resource "google_container_node_pool" "pools" {
       max_node_count = lookup(autoscaling.value, "max_size", autoscaling.value.min_size)
     }
   }
+
   upgrade_settings {
-    max_surge       = each.value.max_surge
+    max_surge       = each.value.max_surge == 0 ? max(ceil(each.value.min_size/4), 1) : each.value.max_surge
     max_unavailable = each.value.max_unavailable
   }
 
@@ -76,7 +78,6 @@ resource "google_container_node_pool" "pools" {
     ignore_changes = [
       initial_node_count,
       node_config["taint"],
-
     ]
   }
 
