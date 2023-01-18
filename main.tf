@@ -34,7 +34,7 @@ locals {
     disk_size_gb     = 50
     service_account  = ""
     machine_image    = "COS"
-    max_surge        = 1
+    max_surge        = 0
     max_unavailable  = 0
     preemptible      = false
   }, var.defaults_node_pools_configs)
