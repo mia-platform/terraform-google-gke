@@ -40,7 +40,7 @@ resource "google_container_node_pool" "pools" {
   }
 
   upgrade_settings {
-    max_surge       = max(each.value.max_surge == 0 ? ceil(each.value.min_size/4) : each.value.max_surge, 1)
+    max_surge       = each.value.max_surge == 0 ? max(ceil(each.value.min_size/4), 1) : each.value.max_surge
     max_unavailable = each.value.max_unavailable
   }
 
