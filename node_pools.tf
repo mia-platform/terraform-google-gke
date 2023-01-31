@@ -40,7 +40,7 @@ resource "google_container_node_pool" "pools" {
   }
 
   upgrade_settings {
-    max_surge       = each.value.max_surge == 0 ? max(ceil(each.value.min_size/4), 1) : each.value.max_surge
+    max_surge       = each.value.max_surge == 0 ? max(ceil(each.value.min_size / 4), 1) : each.value.max_surge
     max_unavailable = each.value.max_unavailable
   }
 
@@ -54,6 +54,7 @@ resource "google_container_node_pool" "pools" {
     disk_type        = "pd-standard"
     min_cpu_platform = each.value.min_cpu_platform
     preemptible      = each.value.preemptible
+    spot             = each.value.spot
 
     service_account = each.value.service_account
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
