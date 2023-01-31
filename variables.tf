@@ -39,7 +39,7 @@ variable "kubernetes_version" {
 variable "location" {
   type        = string
   description = "The location where you want to create the cluster, must be a valid GCP region or zone. The default value will create a regional cluster."
-  default = "europe-west1"
+  default     = "europe-west1"
 }
 
 variable "zones" {
