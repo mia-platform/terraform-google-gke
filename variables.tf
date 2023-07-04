@@ -109,6 +109,12 @@ variable "enable_pod_security_policies" {
   description = "Enable Pod Security Policy in cluster"
 }
 
+variable "csi_driver_enabled" {
+  type        = bool
+  default     = false
+  description = "Enable new CSI Persistent Volume controller"
+}
+
 variable "defaults_node_pools_configs" {
   type        = map(string) # Check the README for the valid properties for this object
   default     = {}

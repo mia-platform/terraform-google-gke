@@ -15,7 +15,7 @@
 */
 
 resource "google_container_node_pool" "pools" {
-  provider = google-beta
+  provider = google
   for_each = local.node_pools
 
   project  = var.project_id

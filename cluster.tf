@@ -141,7 +141,7 @@ resource "google_container_cluster" "master" {
     }
 
     gce_persistent_disk_csi_driver_config {
-      enabled = false
+      enabled = var.csi_driver_enabled
     }
 
     kalm_config {
