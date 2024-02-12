@@ -59,6 +59,17 @@ module "gke" {
       machine_type = "n2-standard2"
     },
   ]
+
+  node_pools_taints = {
+    "pool-2" = [
+      {
+        key    = "key"
+        value  = "value"
+        effect = "NO_SCHEDULE"
+      },
+    ]
+  }
+
 }
 
 data "google_client_config" "default" {
