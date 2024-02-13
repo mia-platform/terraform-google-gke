@@ -67,7 +67,15 @@ resource "google_container_node_pool" "pools" {
       mode = "GKE_METADATA"
     }
 
-    taint  = lookup(var.node_pools_taints, each.key, [])
+    dynamic "taint" {
+      for_each = lookup(var.node_pools_taints, each.key, [])
+      content {
+        effect = taint.value.effect
+        key    = taint.value.key
+        value  = taint.value.value
+      }
+    }
+
     labels = lookup(var.node_pools_labels, each.key, var.defaults_node_pools_labels)
     tags   = lookup(var.node_pools_tags, each.key, var.defaults_node_pools_tags)
     metadata = {
