@@ -42,6 +42,7 @@ The node_pools variable takes the following parameters:
 | disk_size_gb | The root disk size of the nodes, expressed in GB. The minimum value is `10` | number | `50` | ✅ | Optional |
 | service_account | The service account to be used by the Node VMs | string | `""` | ✅ | Optional |
 | node_locations | A comma separated list of zone location for the pool | string | `""` | ❌ | Optional |
+| sandbox_enabled | Turn on or off the gvisor sandbox for the nodes | boll | "false" | ❌ | Optional |
 
 ## Contributing
 
