@@ -115,6 +115,12 @@ resource "google_container_cluster" "master" {
     enabled = var.vertical_pod_autoscaling_enabled
   }
 
+  monitoring_config {
+    managed_prometheus {
+      enabled = false
+    }
+  }
+
   addons_config {
     http_load_balancing {
       disabled = false
