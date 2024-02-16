@@ -38,6 +38,7 @@ locals {
     max_unavailable  = 0
     preemptible      = false
     spot             = false
+    sandbox_enabled  = false
   }, var.defaults_node_pools_configs)
 
   node_pool_names = [for pool in var.node_pools : pool.name]

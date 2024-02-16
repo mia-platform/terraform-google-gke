@@ -15,7 +15,7 @@
 */
 
 resource "google_container_node_pool" "pools" {
-  provider = google
+  provider = google-beta
   for_each = local.node_pools
 
   project  = var.project_id
@@ -58,6 +58,13 @@ resource "google_container_node_pool" "pools" {
 
     service_account = each.value.service_account
     oauth_scopes    = ["https://www.googleapis.com/auth/cloud-platform"]
+
+    dynamic "sandbox_config" {
+      for_each = tobool((lookup(each.value, "sandbox_enabled", false))) ? ["gvisor"] : []
+      content {
+        sandbox_type = sandbox_config.value
+      }
+    }
 
     shielded_instance_config {
       enable_secure_boot          = true
