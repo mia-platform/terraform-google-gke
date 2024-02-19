@@ -50,7 +50,6 @@ resource "google_container_cluster" "master" {
   enable_tpu                  = false
 
   logging_service    = "none"
-  monitoring_service = "none"
 
   maintenance_policy {
     daily_maintenance_window {
