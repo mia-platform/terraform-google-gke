@@ -49,8 +49,6 @@ resource "google_container_cluster" "master" {
   enable_legacy_abac          = false
   enable_tpu                  = false
 
-  logging_service    = "none"
-
   maintenance_policy {
     daily_maintenance_window {
       start_time = var.maintenance_start_time
