@@ -115,6 +115,12 @@ variable "csi_driver_enabled" {
   description = "Enable new CSI Persistent Volume controller"
 }
 
+variable "deletion_protection" {
+  type        = bool
+  default     = true
+  description = "Enable the deletion protection for avoiding to accidentally delete the cluster with terraform destroy"
+}
+
 variable "defaults_node_pools_configs" {
   type        = map(string) # Check the README for the valid properties for this object
   default     = {}

@@ -112,6 +112,10 @@ resource "google_container_cluster" "master" {
     enabled = var.vertical_pod_autoscaling_enabled
   }
 
+  logging_config {
+    enable_components = []
+  }
+
   monitoring_config {
     managed_prometheus {
       enabled = false
@@ -167,6 +171,8 @@ resource "google_container_cluster" "master" {
     update = "45m"
     delete = "45m"
   }
+
+  deletion_protection = var.deletion_protection
 
   lifecycle {
     ignore_changes = [
