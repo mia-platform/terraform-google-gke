@@ -50,8 +50,8 @@ resource "google_container_node_pool" "pools" {
     machine_type = each.value.machine_type
 
     local_ssd_count  = 0
+    disk_type        = each.value.disk_type
     disk_size_gb     = each.value.disk_size_gb
-    disk_type        = "pd-standard"
     min_cpu_platform = each.value.min_cpu_platform
     preemptible      = each.value.preemptible
     spot             = each.value.spot

@@ -39,6 +39,7 @@ The node_pools variable takes the following parameters:
 | machine_type | The GCP instance machine type to use | string |  | ✅ | Required |
 | machine_image | The GCP instance machine image name to use | string | `"COS"` | ✅ | Optional |
 | min_cpu_platform | The minimum CPU platform to use, if not set the zone default will be used | string | `""` | ✅ | Optional |
+| disk_type | The root disk type of the nodes. | string | `pd-standard` | ✅ | Optional |
 | disk_size_gb | The root disk size of the nodes, expressed in GB. The minimum value is `10` | number | `50` | ✅ | Optional |
 | service_account | The service account to be used by the Node VMs | string | `""` | ✅ | Optional |
 | node_locations | A comma separated list of zone location for the pool | string | `""` | ❌ | Optional |
