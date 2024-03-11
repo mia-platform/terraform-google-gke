@@ -31,6 +31,7 @@ locals {
   defaults_node_pools_configs = merge({
     min_size         = 3
     min_cpu_platform = ""
+    disk_type        = "pd-standard"
     disk_size_gb     = 50
     service_account  = ""
     machine_image    = "COS"
