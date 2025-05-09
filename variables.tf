@@ -180,15 +180,3 @@ variable "enable_shielded_nodes" {
   default     = true
   description = "The flag that enables shielded nodes"
 }
-
-variable "service_account" {
-  type        = string
-  default     = ""
-  description = "Node Pool Sevice Account"
-}
-
-variable "sa_display_name" {
-  type        = string
-  default     = ""
-  description = "Node Pool Sevice Account Display Name"
-}
