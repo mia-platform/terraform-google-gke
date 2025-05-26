@@ -180,3 +180,9 @@ variable "enable_shielded_nodes" {
   default     = true
   description = "The flag that enables shielded nodes"
 }
+
+variable "cluster_release_channel" {
+  type        = string
+  default     = "UNSPECIFIED"
+  description = "GKE Upgrade release channel"
+}

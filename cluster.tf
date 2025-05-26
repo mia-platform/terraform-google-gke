@@ -26,7 +26,7 @@ resource "google_container_cluster" "master" {
   default_max_pods_per_node = 110
 
   release_channel {
-    channel = "UNSPECIFIED"
+    channel = var.cluster_release_channel
   }
 
   cluster_autoscaling {
