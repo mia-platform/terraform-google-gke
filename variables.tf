@@ -169,6 +169,18 @@ variable "maintenance_start_time" {
   default     = "01:00"
 }
 
+variable "maintenance_exclusion_start_time" {
+  type        = string
+  description = "Time window specified for excluding any maintenance operations in ISO 8601 format"
+  default     = null
+}
+
+variable "maintenance_exclusion_end_time" {
+  type        = string
+  description = "Time window specified for excluding any maintenance operations in ISO 8601 format"
+  default     = null
+}
+
 variable "labels" {
   type        = map(string)
   description = "The GCP labels to attach on the GKE cluster"

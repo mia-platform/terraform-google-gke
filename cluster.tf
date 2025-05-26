@@ -53,6 +53,17 @@ resource "google_container_cluster" "master" {
     daily_maintenance_window {
       start_time = var.maintenance_start_time
     }
+    dynamic "maintenance_exclusion" {
+      for_each = (var.maintenance_exclusion_start_time != null && var.maintenance_exclusion_end_time != null) ? [1] : []
+      content {
+        end_time       = var.maintenance_exclusion_end_time
+        exclusion_name = "MAINTENANCE EXCLUSION TO AVOID UNWANTED AUTO-UPGRADE"
+        start_time     = var.maintenance_exclusion_start_time
+        exclusion_options {
+          scope = "NO_MINOR_UPGRADES"
+        }
+      }
+    }
   }
 
   ip_allocation_policy {
