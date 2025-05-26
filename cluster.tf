@@ -192,8 +192,7 @@ resource "google_container_cluster" "master" {
       min_master_version,
       binary_authorization,
       node_pool_auto_config,
-      node_pool_defaults,
-      maintenance_policy
+      node_pool_defaults
     ]
   }
 }
