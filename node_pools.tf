@@ -94,6 +94,7 @@ resource "google_container_node_pool" "pools" {
     ignore_changes = [
       initial_node_count,
       node_config["taint"],
+      management["auto_upgrade"]
     ]
   }
 
