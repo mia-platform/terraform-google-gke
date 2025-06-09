@@ -181,6 +181,12 @@ variable "maintenance_exclusion_end_time" {
   default     = null
 }
 
+variable "maintenance_scope" {
+  type        = string
+  description = "Maintenance scope: it default to no minor upgrades"
+  default     = "NO_MINOR_UPGRADES"
+}
+
 variable "labels" {
   type        = map(string)
   description = "The GCP labels to attach on the GKE cluster"

@@ -60,7 +60,7 @@ resource "google_container_cluster" "master" {
         exclusion_name = "MAINTENANCE EXCLUSION TO AVOID UNWANTED AUTO-UPGRADE"
         start_time     = var.maintenance_exclusion_start_time
         exclusion_options {
-          scope = "NO_MINOR_UPGRADES"
+          scope = var.maintenance_scope
         }
       }
     }
