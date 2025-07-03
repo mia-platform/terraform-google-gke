@@ -206,14 +206,14 @@ variable "cluster_release_channel" {
 }
 
 variable "autoupgrade_settings" {
-  type        = object({
-    enabled = string,
-    strategy = string,
-    batch_node_count = number,
-    batch_soak_duration = string,
+  type = object({
+    enabled                 = string,
+    strategy                = string,
+    batch_node_count        = number,
+    batch_soak_duration     = string,
     node_pool_soak_duration = string
   })
-    default = {
+  default = {
     enabled                 = false
     strategy                = "SURGE"
     batch_node_count        = 1
