@@ -25,7 +25,7 @@ resource "google_container_node_pool" "pools" {
   cluster = google_container_cluster.master.name
   management {
     auto_repair  = true
-    auto_upgrade = false
+    auto_upgrade = var.autoupgrade_settings.enabled
   }
 
   initial_node_count = each.value.min_size == each.value.max_size ? null : each.value.min_size
@@ -40,8 +40,18 @@ resource "google_container_node_pool" "pools" {
   }
 
   upgrade_settings {
+    strategy = var.autoupgrade_settings.strategy
     max_surge       = each.value.max_surge == 0 ? max(ceil(each.value.min_size / 4), 1) : each.value.max_surge
     max_unavailable = each.value.max_unavailable
+
+    blue_green_settings {
+      standard_rollout_policy {
+        batch_node_count    = var.autoupgrade_settings.batch_node_count
+        batch_soak_duration = var.autoupgrade_settings.batch_soak_duration
+      }
+
+      node_pool_soak_duration = var.autoupgrade_settings.node_pool_soak_duration
+    }
   }
 
   node_locations = lookup(each.value, "node_locations", "") != "" ? split(",", each.value["node_locations"]) : null
