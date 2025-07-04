@@ -208,10 +208,10 @@ variable "cluster_release_channel" {
 variable "autoupgrade_settings" {
   type = object({
     enabled                 = optional(string, false),
-    strategy                = optional(string,"SURGE")
-    batch_node_count        = optional(number,1)
+    strategy                = optional(string, "SURGE")
+    batch_node_count        = optional(number, 1)
     batch_soak_duration     = optional(string, "300s")
-    node_pool_soak_duration = optional(string,"3600s")
+    node_pool_soak_duration = optional(string, "3600s")
   })
   default     = {}
   description = "GKE Auto upgrade settings"

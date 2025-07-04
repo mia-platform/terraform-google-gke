@@ -41,8 +41,8 @@ resource "google_container_node_pool" "pools" {
 
   upgrade_settings {
     strategy        = var.autoupgrade_settings.strategy
-    max_surge       = each.value.max_surge == 0 ? max(ceil(each.value.min_size / 4), 1) : each.value.max_surge
-    max_unavailable = each.value.max_unavailable
+    max_surge       = var.autoupgrade_settings.strategy == "SURGE" ? (each.value.max_surge == 0 ? max(ceil(each.value.min_size / 4), 1) : each.value.max_surge) : null
+    max_unavailable = var.autoupgrade_settings.strategy == "SURGE" ? each.value.max_unavailable : null
 
     dynamic "blue_green_settings" {
       for_each = var.autoupgrade_settings.strategy == "BLUE_GREEN" ? [1] : []
