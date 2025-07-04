@@ -213,5 +213,6 @@ variable "autoupgrade_settings" {
     batch_soak_duration     = optional(string, "300s")
     node_pool_soak_duration = optional(string,"3600s")
   })
+  default     = {}
   description = "GKE Auto upgrade settings"
 }
