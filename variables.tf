@@ -140,7 +140,7 @@ variable "defaults_node_pools_labels" {
 }
 
 variable "node_pools" {
-  type        = list(map(string)) # Check the README for the valid properties for the object contained in the array
+  type        = list(map(any)) # Check the README for the valid properties for the object contained in the array
   default     = []
   description = "An object list defining node pools configurations"
 }
