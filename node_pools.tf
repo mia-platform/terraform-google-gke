@@ -40,21 +40,21 @@ resource "google_container_node_pool" "pools" {
   }
 
   upgrade_settings {
-    strategy        = var.autoupgrade_settings.strategy
-    max_surge       = var.autoupgrade_settings.strategy == "SURGE" ? (each.value.max_surge == 0 ? max(ceil(each.value.min_size / 4), 1) : each.value.max_surge) : null
-    max_unavailable = var.autoupgrade_settings.strategy == "SURGE" ? each.value.max_unavailable : null
+    strategy        = each.autoupgrade_settings.strategy
+    max_surge       = each.autoupgrade_settings.strategy == null ? (each.value.max_surge == 0 ? max(ceil(each.value.min_size / 4), 1) : each.value.max_surge) : null
+    max_unavailable = each.autoupgrade_settings.strategy == null ? each.value.max_unavailable : null
 
     dynamic "blue_green_settings" {
-      for_each = var.autoupgrade_settings.strategy == "BLUE_GREEN" ? [1] : []
+      for_each = each.autoupgrade_settings.strategy == "BLUE_GREEN" ? [1] : []
 
       content {
 
         standard_rollout_policy {
-          batch_node_count    = var.autoupgrade_settings.batch_node_count
-          batch_soak_duration = var.autoupgrade_settings.batch_soak_duration
+          batch_node_count    = each.autoupgrade_settings.batch_node_count
+          batch_soak_duration = each.autoupgrade_settings.batch_soak_duration
         }
 
-        node_pool_soak_duration = var.autoupgrade_settings.node_pool_soak_duration
+        node_pool_soak_duration = each.autoupgrade_settings.node_pool_soak_duration
       }
     }
   }
