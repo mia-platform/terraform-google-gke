@@ -42,6 +42,15 @@ locals {
     sandbox_enabled  = false
   }, var.defaults_node_pools_configs)
 
+  default_node_pools_autoupgrade_settings = {
+    enabled                 = false
+    strategy                = "SURGE"
+    batch_node_count        = 1
+    batch_soak_duration     = "300s"
+    node_pool_soak_duration = "3600s"
+  }
+
+
   node_pool_names = [for pool in var.node_pools : pool.name]
   node_pools = { for pool in var.node_pools :
     pool.name => merge(local.defaults_node_pools_configs, pool)

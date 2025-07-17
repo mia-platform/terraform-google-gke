@@ -26,7 +26,7 @@ resource "google_container_node_pool" "pools" {
 
   management {
     auto_repair  = true
-    auto_upgrade = lookup(var.node_pools_autoupgrade_settings, each.key).enabled
+    auto_upgrade = lookup(var.node_pools_autoupgrade_settings, each.key, local.default_node_pools_autoupgrade_settings).enabled
   }
 
   initial_node_count = each.value.min_size == each.value.max_size ? null : each.value.min_size
@@ -41,21 +41,21 @@ resource "google_container_node_pool" "pools" {
   }
 
   upgrade_settings {
-    strategy        = lookup(var.node_pools_autoupgrade_settings, each.key).strategy
-    max_surge       = lookup(var.node_pools_autoupgrade_settings, each.key).strategy == null ? (each.value.max_surge == 0 ? max(ceil(each.value.min_size / 4), 1) : each.value.max_surge) : null
-    max_unavailable = lookup(var.node_pools_autoupgrade_settings, each.key).strategy == null ? each.value.max_unavailable : null
+    strategy        = lookup(var.node_pools_autoupgrade_settings, each.key, local.default_node_pools_autoupgrade_settings).strategy
+    max_surge       = lookup(var.node_pools_autoupgrade_settings, each.key, local.default_node_pools_autoupgrade_settings).strategy == null ? (each.value.max_surge == 0 ? max(ceil(each.value.min_size / 4), 1) : each.value.max_surge) : null
+    max_unavailable = lookup(var.node_pools_autoupgrade_settings, each.key, local.default_node_pools_autoupgrade_settings).strategy == null ? each.value.max_unavailable : null
 
     dynamic "blue_green_settings" {
-      for_each = lookup(var.node_pools_autoupgrade_settings, each.key).strategy == "BLUE_GREEN" ? [1] : []
+      for_each = lookup(var.node_pools_autoupgrade_settings, each.key, local.default_node_pools_autoupgrade_settings).strategy == "BLUE_GREEN" ? [1] : []
 
       content {
 
         standard_rollout_policy {
-          batch_node_count    = lookup(var.node_pools_autoupgrade_settings, each.key).batch_node_count
-          batch_soak_duration = lookup(var.node_pools_autoupgrade_settings, each.key).batch_soak_duration
+          batch_node_count    = lookup(var.node_pools_autoupgrade_settings, each.key, local.default_node_pools_autoupgrade_settings).batch_node_count
+          batch_soak_duration = lookup(var.node_pools_autoupgrade_settings, each.key, local.default_node_pools_autoupgrade_settings).batch_soak_duration
         }
 
-        node_pool_soak_duration = lookup(var.node_pools_autoupgrade_settings, each.key).node_pool_soak_duration
+        node_pool_soak_duration = lookup(var.node_pools_autoupgrade_settings, each.key, local.default_node_pools_autoupgrade_settings).node_pool_soak_duration
       }
     }
   }
