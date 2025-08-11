@@ -216,3 +216,13 @@ variable "node_pools_autoupgrade_settings" {
   default     = {}
   description = "GKE Auto upgrade settings"
 }
+
+variable "recurring_window" {
+  type = object({
+    start_time = string,
+    end_time   = string,
+    recurrence = string
+  })
+  default     = null
+  description = "Recurring maintenance window for the cluster"
+}

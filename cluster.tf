@@ -50,9 +50,22 @@ resource "google_container_cluster" "master" {
   enable_tpu                  = false
 
   maintenance_policy {
-    daily_maintenance_window {
-      start_time = var.maintenance_start_time
+    dynamic "daily_maintenance_window" {
+      for_each = var.recurring_window == null ? [1] : []
+      content {
+        start_time = var.maintenance_start_time
+      }
     }
+
+    dynamic "recurring_window" {
+      for_each = var.recurring_window != null ? [var.recurring_window] : []
+      content {
+        start_time = recurring_window.value.start_time
+        end_time   = recurring_window.value.end_time
+        recurrence = recurring_window.value.recurrence
+      }
+    }
+
     dynamic "maintenance_exclusion" {
       for_each = (var.maintenance_exclusion_start_time != null && var.maintenance_exclusion_end_time != null) ? [1] : []
       content {
